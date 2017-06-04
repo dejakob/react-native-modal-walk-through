@@ -17,11 +17,11 @@ Add scenes
 <ModalWalkThrough
   visible={true}
 >
-  {['scene1', 'scene2'].map(scene => 
+  {['scene1', 'scene2'].map(scene => (
     <View>
       <Text>{scene}</Text>
     </View>
-  )}
+  ))}
 </ModalWalkThrough>
 ```
 
@@ -37,3 +37,7 @@ Add scenes
 |onStepChange|Function |When the user swiped to another step |              |
 |visible  |Boolean    |Should the modal be visible?    |false               |
 
+## Methods
+### goToStep (step: Number)
+Go to a particular step in the walkthrough,
+in case the number is bigger than the last step index, it will close the modal
