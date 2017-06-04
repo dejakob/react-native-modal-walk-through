@@ -21,8 +21,8 @@ class ModalWalkThrough extends Component {
 
   static get defaultProps() {
     return {
-      height: '80%',
-      width: '40%',
+      height: null,
+      width: null,
       onStepChange: null,
       onFinish: null,
       visible: false,
