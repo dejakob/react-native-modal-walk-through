@@ -4,7 +4,7 @@ A modal to walk through different steps in react native
 ## Installation
 Install with yarn or npm
 ```
-yarn add dejakob/react-native-modal-walk-through
+yarn add react-native-modal-walk-through
 ```
 
 Import the lib
