@@ -9,7 +9,7 @@ yarn add dejakob/react-native-modal-walk-through
 
 Import the lib
 ```
-import ModalWalkThrough
+import ModalWalkThrough from 'react-native-modal-walk-through';
 ```
 
 Add scenes
