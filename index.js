@@ -134,7 +134,7 @@ class ModalWalkThrough extends Component {
       <View
         style={[
           styles.sceneWrapper,
-          { height: ModalWalkThrough.height, width: ModalWalkThrough.width },
+          { height: ModalWalkThrough.screenHeight, width: ModalWalkThrough.screenWidth },
         ]}
       >
         <View
