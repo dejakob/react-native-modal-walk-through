@@ -26,7 +26,7 @@ Add scenes
 ```
 
 ## Preview
-![preview](https://media.giphy.com/media/eEiW40iWwaRtS/giphy.gif)
+![preview](https://media.giphy.com/media/U1rr1gjlYDh0k/giphy.gif)
 
 ## Properties
 |Property |Type       |Description                     |Default value       |
