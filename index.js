@@ -30,6 +30,23 @@ class ModalWalkThrough extends Component {
     };
   }
 
+  /**
+   * Get the actual window height in pixels
+   * @returns {Number} value in px
+   */
+  static get screenHeight() {
+    return Dimensions.get('window').height;
+  }
+
+  /**
+   * Get the actual window width in pixels
+   * @returns {Number} value in px
+   */
+  static get screenWidth() {
+    return Dimensions.get('window').width;
+  }
+
+
   constructor() {
     super();
 
@@ -51,7 +68,7 @@ class ModalWalkThrough extends Component {
   }
 
   /**
-   * Height of the walkThrough / flatList
+   * Height of the scene
    * @return {Number|String} the height value
    */
   get height() {
@@ -59,11 +76,11 @@ class ModalWalkThrough extends Component {
   }
 
   /**
-   * Width of the walkThrough / flatList
+   * Width of the scene
    * @return {Number|String} the width value
    */
   get width() {
-    return this.props.width || (Dimensions.get('window').width * 0.8);
+    return this.props.width || (ModalWalkThrough.screenWidth * 0.8);
   }
 
   /**
@@ -84,7 +101,7 @@ class ModalWalkThrough extends Component {
       // Scroll the walkthrough to a specific step
       this.flatList.scrollToOffset({
         animated: true,
-        offset: index * this.width,
+        offset: index * ModalWalkThrough.screenWidth,
       });
     }
   }
@@ -98,7 +115,7 @@ class ModalWalkThrough extends Component {
     // Only when onStepChange was defined
     if (typeof this.props.onStepChange === 'function') {
       const { x } = eventData.nativeEvent.contentOffset;
-      const step = Math.round(x / this.width);
+      const step = Math.round(x / ModalWalkThrough.screenWidth);
 
       // Trigger an onStepChange event with the current step
       this.props.onStepChange(step);
@@ -115,10 +132,17 @@ class ModalWalkThrough extends Component {
   renderChild({ item, index }) {
     return (
       <View
-        key={index}
-        style={[styles.scene, { width: this.width }]}
+        style={[
+          styles.sceneWrapper,
+          { height: ModalWalkThrough.height, width: ModalWalkThrough.width },
+        ]}
       >
-        {item}
+        <View
+          key={index}
+          style={[styles.scene, { height: this.height, width: this.width }]}
+        >
+          {item}
+        </View>
       </View>
     );
   }
@@ -137,11 +161,11 @@ class ModalWalkThrough extends Component {
             data={this.props.children}
             renderItem={this.renderChild}
             horizontal
-            style={[styles.list, { maxHeight: this.height, width: this.width }]}
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             ref={(flatList) => { this.flatList = flatList; }}
             onScroll={this.handleScroll}
+            bounces={false}
           />
         </View>
       </Modal>
@@ -153,15 +177,14 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.8)',
     flex: 1,
+  },
+  sceneWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  list: {
+  scene: {
     backgroundColor: '#ffffff',
     borderRadius: 3,
-  },
-  scene: {
-    flex: 1,
   },
 });
 

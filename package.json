@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-walk-through",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Walkthrough in a React Native modal",
   "main": "index.js",
   "repository": "http://github.com/dejakob/react-native-modal-walk-through",
