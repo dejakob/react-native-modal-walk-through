@@ -35,9 +35,14 @@ Add scenes
 |width    |Number     |Width of the walkthrough        |80% of screen width |
 |onFinish |Function   |When the user went throught the entire walkthrough|  |
 |onStepChange|Function |When the user swiped to another step |              |
-|visible  |Boolean    |Should the modal be visible?    |false               |
 
 ## Methods
 ### goToStep (step: Number)
 Go to a particular step in the walkthrough,
 in case the number is bigger than the last step index, it will close the modal
+
+### show
+Show the modal
+
+### hide
+Hide the modal

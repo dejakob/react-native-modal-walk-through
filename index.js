@@ -23,7 +23,6 @@ class ModalWalkThrough extends Component {
       width: PropTypes.number,
       onStepChange: PropTypes.func,
       onFinish: PropTypes.func,
-      visible: PropTypes.bool,
       children: PropTypes.children,
     };
   }
@@ -34,7 +33,6 @@ class ModalWalkThrough extends Component {
       width: null,
       onStepChange: null,
       onFinish: null,
-      visible: false,
       children: null,
     };
   }
@@ -62,12 +60,14 @@ class ModalWalkThrough extends Component {
     this.goToStep = this.goToStep.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleHardwareBackPress = this.handleHardwareBackPress.bind(this);
+    this.show = this.show.bind(this);
+    this.hide = this.hide.bind(this);
     this.renderChild = this.renderChild.bind(this);
   }
 
   componentWillMount() {
     this.state = {
-      visible: this.props.visible,
+      visible: false,
     };
   }
 
@@ -79,12 +79,6 @@ class ModalWalkThrough extends Component {
       BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
     } else {
       BackAndroid.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.visible !== this.state.visible) {
-      this.state.visible = nextProps.visible;
     }
   }
 
@@ -159,6 +153,22 @@ class ModalWalkThrough extends Component {
    * @returns {void}
    */
   handleHardwareBackPress() {
+    this.hide();
+  }
+
+  /**
+   * Make the modal visible
+   * @returns {void}
+   */
+  show() {
+    this.setState({ visible: true });
+  }
+
+  /**
+   * Make the modal invisible
+   * @returns {void}
+   */
+  hide() {
     this.setState({ visible: false });
   }
 
@@ -195,7 +205,7 @@ class ModalWalkThrough extends Component {
         visible={this.state.visible}
       >
         <TouchableWithoutFeedback
-          onPress={() => { this.setState({ visible: false }); }}
+          onPress={this.hide}
         >
           <View
             style={styles.overlay}
