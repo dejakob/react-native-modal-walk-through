@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, FlatList, View, Dimensions, StyleSheet } from 'react-native';
+import { Modal, FlatList, View, Dimensions, StyleSheet, BackHandler } from 'react-native';
 
 /**
  * <ModalWalkThrough />
@@ -52,6 +52,7 @@ class ModalWalkThrough extends Component {
 
     this.goToStep = this.goToStep.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleHardwareBackPress = this.handleHardwareBackPress.bind(this);
     this.renderChild = this.renderChild.bind(this);
   }
 
@@ -59,12 +60,16 @@ class ModalWalkThrough extends Component {
     this.state = {
       visible: this.props.visible,
     };
+
+    BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible !== this.state.visible) {
       this.state.visible = nextProps.visible;
     }
+
+    BackHandler.removeEventListener('hardwareBackPress', this.handleHardwareBackPress);
   }
 
   /**
@@ -120,6 +125,14 @@ class ModalWalkThrough extends Component {
       // Trigger an onStepChange event with the current step
       this.props.onStepChange(step);
     }
+  }
+
+  /**
+   * Handle a press on the physical back button (Android, tvOS)
+   * @returns {void}
+   */
+  handleHardwareBackPress() {
+    this.setState({ visible: false });
   }
 
   /**
