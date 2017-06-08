@@ -60,7 +60,9 @@ class ModalWalkThrough extends Component {
     this.state = {
       visible: this.props.visible,
     };
+  }
 
+  componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
   }
 
@@ -68,7 +70,9 @@ class ModalWalkThrough extends Component {
     if (nextProps.visible !== this.state.visible) {
       this.state.visible = nextProps.visible;
     }
+  }
 
+  componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleHardwareBackPress);
   }
 
