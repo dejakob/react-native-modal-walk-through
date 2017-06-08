@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, FlatList, View, Dimensions, StyleSheet, BackHandler } from 'react-native';
+import { Modal, FlatList, View, Dimensions, StyleSheet, BackHandler, BackAndroid } from 'react-native';
 
 /**
  * <ModalWalkThrough />
@@ -63,7 +63,14 @@ class ModalWalkThrough extends Component {
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    if (
+      BackHandler &&
+      typeof BackHandler.addEventListener === 'function'
+    ) {
+      BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    } else {
+      BackAndroid.addEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,7 +80,14 @@ class ModalWalkThrough extends Component {
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    if (
+      BackHandler &&
+      typeof BackHandler.addEventListener === 'function'
+    ) {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    } else {
+      BackAndroid.removeEventListener('hardwareBackPress', this.handleHardwareBackPress);
+    }
   }
 
   /**
