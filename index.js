@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, FlatList, View, Dimensions, StyleSheet, BackHandler, BackAndroid } from 'react-native';
+import {
+  Modal,
+  FlatList,
+  View,
+  Dimensions,
+  StyleSheet,
+  BackHandler,
+  BackAndroid,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 /**
  * <ModalWalkThrough />
@@ -185,20 +194,24 @@ class ModalWalkThrough extends Component {
         animationType="fade"
         visible={this.state.visible}
       >
-        <View
-          style={styles.overlay}
+        <TouchableWithoutFeedback
+          onPress={() => { this.setState({ visible: false }); }}
         >
-          <FlatList
-            data={this.props.children}
-            renderItem={this.renderChild}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            ref={(flatList) => { this.flatList = flatList; }}
-            onScroll={this.handleScroll}
-            bounces={false}
-          />
-        </View>
+          <View
+            style={styles.overlay}
+          >
+            <FlatList
+              data={this.props.children}
+              renderItem={this.renderChild}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              ref={(flatList) => { this.flatList = flatList; }}
+              onScroll={this.handleScroll}
+              bounces={false}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
     );
   }
