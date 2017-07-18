@@ -46,3 +46,5 @@ Show the modal
 
 ### hide
 Hide the modal
+
+[![gitcheese.com](https://s3.amazonaws.com/gitcheese-ui-master/images/badge.svg)](https://www.gitcheese.com/donate/users/5782495/repos/93313202)
